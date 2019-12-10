@@ -1,0 +1,6 @@
+jwt:
+  filter:
+    secret-key: $xurr00s
+    public-resources:
+      - method: POST
+        urls: /user
