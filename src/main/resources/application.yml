@@ -4,3 +4,15 @@ jwt:
     public-resources:
       - method: POST
         urls: /user
+      - method: GET
+        urls: /h2-console/**
+
+server:
+  port: 9090
+
+spring:
+  h2:
+    console:
+      settings:
+        web-allow-others: true
+      enabled: true
