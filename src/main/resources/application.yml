@@ -5,14 +5,10 @@ jwt:
       - method: POST
         urls: /user
       - method: GET
-        urls: /h2-console/**
+        urls: /swagger-ui.html, /swagger-resources/**, /v2/**, /webjars/**
 
 server:
-  port: 9090
-
-spring:
+  port: 8080
   h2:
     console:
-      settings:
-        web-allow-others: true
       enabled: true

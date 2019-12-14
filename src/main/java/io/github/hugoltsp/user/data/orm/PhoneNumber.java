@@ -3,7 +3,8 @@ package io.github.hugoltsp.user.data.orm;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Table(name = "PHONE_NUMBER")
+@Table(name = "PHONE_NUMBER",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"DDD", "NUMBER"})})
 @Entity
 public class PhoneNumber {
 
