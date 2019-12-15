@@ -41,7 +41,6 @@ public class UserLogIn {
         userTokenService.invalidateTokens(user);
         var token = userTokenService.createToken(user);
         authenticationService.authenticate(token);
-
         return user;
     }
 

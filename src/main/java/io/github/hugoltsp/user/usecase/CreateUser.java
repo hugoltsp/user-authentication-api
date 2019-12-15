@@ -1,12 +1,8 @@
 package io.github.hugoltsp.user.usecase;
 
-import com.hugoltsp.spring.boot.starter.jwt.filter.AuthenticationContext;
-import com.hugoltsp.spring.boot.starter.jwt.filter.AuthenticationContextHolder;
 import io.github.hugoltsp.user.data.orm.User;
-import io.github.hugoltsp.user.data.orm.UserToken;
 import io.github.hugoltsp.user.data.repository.UserRepository;
 import io.github.hugoltsp.user.infra.security.JwtService;
-import io.github.hugoltsp.user.infra.security.domain.AuthenticatedUserDetails;
 import io.github.hugoltsp.user.usecase.domain.UserApiException;
 import io.github.hugoltsp.user.usecase.domain.UserCreationPort;
 import org.slf4j.Logger;
@@ -25,7 +21,8 @@ public class CreateUser {
     private final AuthenticationService authenticationService;
 
     public CreateUser(Logger logger, JwtService jwtService,
-                      UserRepository userRepository, UserTokenService userTokenService,
+                      UserRepository userRepository,
+                      UserTokenService userTokenService,
                       AuthenticationService authenticationService) {
         this.logger = logger;
         this.jwtService = jwtService;
@@ -35,10 +32,10 @@ public class CreateUser {
     }
 
     public User create(UserCreationPort userCreationPort) {
-        logger.info("Creating user withe the folling e-mail [{}]", userCreationPort.getEmail());
+        logger.info("Creating user withe the following e-mail [{}]", userCreationPort.getEmail());
         userRepository.findByEmail(userCreationPort.getEmail())
                 .ifPresent(existingUser -> {
-                    throw new UserApiException("There's already a user registered for the given e-mail");
+                    throw new UserApiException("There's already a user registered with the given e-mail");
                 });
 
         var user = userRepository.save(userCreationPort.asEntity());

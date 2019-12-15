@@ -2,7 +2,6 @@ package io.github.hugoltsp.user.presenter.adapter;
 
 import com.hugoltsp.spring.boot.starter.jwt.filter.AuthenticationContext;
 import com.hugoltsp.spring.boot.starter.jwt.filter.AuthenticationContextHolder;
-import io.github.hugoltsp.user.data.orm.PhoneNumber;
 import io.github.hugoltsp.user.data.orm.User;
 import io.github.hugoltsp.user.infra.security.domain.AuthenticatedUserDetails;
 import io.github.hugoltsp.user.presenter.domain.UserResponse;
@@ -46,7 +45,6 @@ public class UserResponseAdapter {
 
         var phones = user.getPhoneNumbers()
                 .stream()
-                .map(PhoneNumber::getId)
                 .map(phoneNumber -> new PhoneNumberResponse(phoneNumber.getDdd(), phoneNumber.getNumber()))
                 .collect(Collectors.toList());
 
@@ -58,7 +56,6 @@ public class UserResponseAdapter {
                 phones, userDetails.getToken(),
                 uri,
                 user.getName());
-
     }
 
 

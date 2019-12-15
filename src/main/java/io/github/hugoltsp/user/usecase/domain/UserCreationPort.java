@@ -1,7 +1,6 @@
 package io.github.hugoltsp.user.usecase.domain;
 
 import io.github.hugoltsp.user.data.orm.PhoneNumber;
-import io.github.hugoltsp.user.data.orm.PhoneNumber.PhoneNumberId;
 import io.github.hugoltsp.user.data.orm.User;
 
 import java.time.LocalDateTime;
@@ -43,7 +42,7 @@ public class UserCreationPort {
         user.setEmail(email);
         user.setName(name);
         user.setPassword(encodedPassword);
-        phones.stream().map(PhoneNumberPort::asEntity).forEach(user::addPhoeNumber);
+        phones.stream().map(PhoneNumberPort::asEntity).forEach(user::addPhoneNumber);
         return user;
     }
 
@@ -67,7 +66,8 @@ public class UserCreationPort {
 
         PhoneNumber asEntity() {
             var phoneNumber = new PhoneNumber();
-            phoneNumber.setId(new PhoneNumberId(getDdd(), getNumber()));
+            phoneNumber.setDdd(getDdd());
+            phoneNumber.setNumber(getNumber());
             return phoneNumber;
         }
     }

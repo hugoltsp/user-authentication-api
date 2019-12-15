@@ -104,7 +104,7 @@ public class User {
         this.phoneNumbers = phoneNumbers;
     }
 
-    public void addPhoeNumber(PhoneNumber phoneNumber) {
+    public void addPhoneNumber(PhoneNumber phoneNumber) {
         phoneNumber.setUser(this);
         phoneNumbers.add(phoneNumber);
     }
