@@ -3,15 +3,12 @@ jwt:
     secret-key: $xurr00s
     public-resources:
       - method: POST
-        urls: /user
+        urls: /user,/user/login
       - method: GET
         urls: /swagger-ui.html, /swagger-resources/**, /v2/**, /webjars/**
 
-server:
-  port: 8080
-  h2:
-    console:
-      enabled: true
+app:
+  token-expiration-minutes: 30
 
 spring:
   jackson:

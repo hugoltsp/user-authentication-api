@@ -9,13 +9,13 @@ public class UserResponse {
     private final LocalDateTime creationDate;
     private final LocalDateTime modificationDate;
     private final LocalDateTime lastLogin;
+    private final String name;
     private final String token;
     private final String href;
     private final List<PhoneNumberResponse> phones;
 
     public UserResponse(Long id, LocalDateTime creationDate, LocalDateTime modificationDate,
-                        LocalDateTime lastLogin, String token, String href,
-                        List<PhoneNumberResponse> phones) {
+                        LocalDateTime lastLogin, List<PhoneNumberResponse> phones, String token, String href, String name) {
         this.id = id;
         this.creationDate = creationDate;
         this.modificationDate = modificationDate;
@@ -23,6 +23,11 @@ public class UserResponse {
         this.token = token;
         this.href = href;
         this.phones = phones;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Long getId() {

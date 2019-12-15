@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -31,13 +30,6 @@ public class UserResponseAdapter {
 
     public ResponseEntity<?> adapt(Optional<User> user) {
         return ResponseEntity.of(user.map(this::toUserResponse));
-    }
-
-    public ResponseEntity<?> adapt(List<User> users) {
-        return users.isEmpty() ? ResponseEntity.noContent().build() :
-                ResponseEntity.ok(users.stream()
-                        .map(this::toUserResponse)
-                        .collect(Collectors.toList()));
     }
 
     private UserResponse toUserResponse(User user) {
@@ -63,9 +55,9 @@ public class UserResponseAdapter {
                 user.getCreationDate(),
                 user.getLastModified(),
                 user.getLastLogin(),
-                userDetails.getToken(),
+                phones, userDetails.getToken(),
                 uri,
-                phones);
+                user.getName());
 
     }
 

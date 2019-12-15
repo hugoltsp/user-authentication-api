@@ -36,4 +36,11 @@ class UserTokenService {
         return userTokenRepository.save(userToken);
     }
 
+    void invalidateTokens(User user) {
+        userTokenRepository.findByUserId(user.getId())
+                .stream()
+                .peek(UserToken::deactivate)
+                .forEach(userTokenRepository::save);
+    }
+
 }

@@ -30,7 +30,7 @@ public class FindUserById {
                 .map(AuthenticatedUserDetails::getId)
                 .filter(currentId -> !currentId.equals(id))
                 .isPresent()) {
-            throw new UserApiAuthenticationException("The given id conflicts with the current authenticated user");
+            throw new UserApiAuthenticationException("The given id doesn't match the current authenticated user");
         }
 
         return userRepository.findById(id);

@@ -65,6 +65,14 @@ public class UserToken {
         this.userId = userId;
     }
 
+    public boolean isInactive() {
+        return status == Status.INACTIVE;
+    }
+
+    public void deactivate() {
+        status = Status.INACTIVE;
+    }
+
     public enum Status {
         ACTIVE,
         INACTIVE
