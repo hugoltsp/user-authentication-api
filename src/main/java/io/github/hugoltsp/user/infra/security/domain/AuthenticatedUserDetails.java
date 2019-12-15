@@ -2,31 +2,15 @@ package io.github.hugoltsp.user.infra.security.domain;
 
 import com.hugoltsp.spring.boot.starter.jwt.filter.userdetails.UserDetails;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.impl.DefaultClaims;
-
-import java.time.LocalDateTime;
 
 public class AuthenticatedUserDetails implements UserDetails {
 
-    private final String email;
-    private final Claims claims;
-    private LocalDateTime passwordUpdateDate;
-
-    public AuthenticatedUserDetails(String email) {
-        this.email = email;
-        this.claims = new DefaultClaims().setSubject(email);
-    }
+    private String email;
+    private String token;
+    private Claims claims;
 
     public String getEmail() {
         return email;
-    }
-
-    public LocalDateTime getPasswordUpdateDate() {
-        return passwordUpdateDate;
-    }
-
-    public void setPasswordUpdateDate(LocalDateTime passwordUpdateDate) {
-        this.passwordUpdateDate = passwordUpdateDate;
     }
 
     @Override
@@ -34,4 +18,19 @@ public class AuthenticatedUserDetails implements UserDetails {
         return claims;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public void setClaims(Claims claims) {
+        this.claims = claims;
+    }
 }

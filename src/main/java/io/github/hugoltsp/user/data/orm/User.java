@@ -2,6 +2,9 @@ package io.github.hugoltsp.user.data.orm;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Table(name = "USER")
@@ -31,8 +34,11 @@ public class User {
     @Column(name = "LAST_LOGIN")
     private LocalDateTime lastLogin;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private Set<PhoneNumber> phoneNumbers;
+    @OneToMany(mappedBy = "user")
+    private Set<PhoneNumber> phoneNumbers = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<UserToken> tokens = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -97,4 +103,18 @@ public class User {
     public void setPhoneNumbers(Set<PhoneNumber> phoneNumbers) {
         this.phoneNumbers = phoneNumbers;
     }
+
+    public void addPhoeNumber(PhoneNumber phoneNumber){
+        phoneNumber.setUser(this);
+        phoneNumbers.add(phoneNumber);
+    }
+
+    public List<UserToken> getTokens() {
+        return tokens;
+    }
+
+    public void setTokens(List<UserToken> tokens) {
+        this.tokens = tokens;
+    }
+
 }

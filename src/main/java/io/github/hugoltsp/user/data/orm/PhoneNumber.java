@@ -39,6 +39,14 @@ public class PhoneNumber {
         @Column(name = "NUMBER", nullable = false)
         private String number;
 
+        public PhoneNumberId(String ddd, String number) {
+            this.ddd = ddd;
+            this.number = number;
+        }
+
+        public PhoneNumberId() {
+        }
+
         public String getDdd() {
             return ddd;
         }
@@ -47,6 +55,13 @@ public class PhoneNumber {
             this.ddd = ddd;
         }
 
+        public String getNumber() {
+            return number;
+        }
+
+        public void setNumber(String number) {
+            this.number = number;
+        }
     }
 
 }
