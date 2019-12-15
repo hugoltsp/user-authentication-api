@@ -12,9 +12,13 @@ import java.util.Date;
 @Component
 public class JwtService {
 
-    private JwtAuthenticationSettings settings;
+    private final JwtAuthenticationSettings settings;
 
-    public String createToken(String email) {
+    public JwtService(JwtAuthenticationSettings settings) {
+        this.settings = settings;
+    }
+
+    public String createJwt(String email) {
 
         return Jwts.builder()
                 .setClaims(new DefaultClaims().setSubject(email))

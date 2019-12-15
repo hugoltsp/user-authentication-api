@@ -1,5 +1,6 @@
 package io.github.hugoltsp.user.presenter.adapter;
 
+import com.hugoltsp.spring.boot.starter.jwt.filter.AuthenticationContext;
 import com.hugoltsp.spring.boot.starter.jwt.filter.AuthenticationContextHolder;
 import io.github.hugoltsp.user.data.orm.User;
 import io.github.hugoltsp.user.infra.security.domain.AuthenticatedUserDetails;
@@ -40,8 +41,9 @@ public class UserResponseAdapter {
                 .toUriString();
 
         var userDetails = AuthenticationContextHolder.getCurrent()
-                .map(AuthenticatedUserDetails.class::cast)
-                .get();
+                .map(AuthenticationContext::getUserDetails)
+                .get()
+                .map(AuthenticatedUserDetails.class::cast).get();
 
         return new UserResponse(
                 user.getId(),

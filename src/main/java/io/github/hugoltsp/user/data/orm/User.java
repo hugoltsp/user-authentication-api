@@ -104,7 +104,7 @@ public class User {
         this.phoneNumbers = phoneNumbers;
     }
 
-    public void addPhoeNumber(PhoneNumber phoneNumber){
+    public void addPhoeNumber(PhoneNumber phoneNumber) {
         phoneNumber.setUser(this);
         phoneNumbers.add(phoneNumber);
     }
@@ -115,6 +115,11 @@ public class User {
 
     public void setTokens(List<UserToken> tokens) {
         this.tokens = tokens;
+    }
+
+    public void addToken(UserToken token) {
+        token.setUser(this);
+        tokens.add(token);
     }
 
 }
