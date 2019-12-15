@@ -32,7 +32,7 @@ class UserTokenService {
         userToken.setCreationDate(LocalDateTime.now());
         userToken.setStatus(ACTIVE);
         userToken.setUser(user);
-        userToken.setJwt(jwtService.createJwt(user.getEmail()));
+        userToken.setJwt(jwtService.createJwt(user.getId()));
         return userTokenRepository.save(userToken);
     }
 

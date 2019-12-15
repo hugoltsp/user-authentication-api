@@ -34,7 +34,7 @@ public class User {
     @Column(name = "LAST_LOGIN")
     private LocalDateTime lastLogin;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<PhoneNumber> phoneNumbers = new HashSet<>();
 
     @OneToMany(mappedBy = "user")

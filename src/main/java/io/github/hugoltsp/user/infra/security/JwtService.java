@@ -18,10 +18,10 @@ public class JwtService {
         this.settings = settings;
     }
 
-    public String createJwt(String email) {
+    public String createJwt(Long id) {
 
         return Jwts.builder()
-                .setClaims(new DefaultClaims().setSubject(email))
+                .setClaims(new DefaultClaims().setSubject(id.toString()))
                 .setIssuedAt(Date.from(Instant.now()))
                 .signWith(SignatureAlgorithm.HS256, settings.getSecretKey())
                 .compact();

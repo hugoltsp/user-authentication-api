@@ -1,6 +1,7 @@
 package io.github.hugoltsp.user.infra.http;
 
 import io.github.hugoltsp.user.infra.http.domain.ErrorResponse;
+import io.github.hugoltsp.user.usecase.domain.UserApiAuthenticationException;
 import io.github.hugoltsp.user.usecase.domain.UserApiException;
 import org.slf4j.Logger;
 import org.springframework.http.HttpHeaders;
@@ -33,6 +34,12 @@ class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<?> applicationException(UserApiException e) {
         logger.error("Error:", e);
         return ResponseEntity.badRequest().body(new ErrorResponse(e.getMessage()));
+    }
+
+    @ExceptionHandler(UserApiAuthenticationException.class)
+    public ResponseEntity<?> userApiAuthenticationException(UserApiAuthenticationException e) {
+        logger.error("Error:", e);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse(e.getMessage()));
     }
 
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers,
