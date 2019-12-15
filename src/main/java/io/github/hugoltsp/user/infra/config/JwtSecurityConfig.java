@@ -1,6 +1,7 @@
 package io.github.hugoltsp.user.infra.config;
 
 import com.hugoltsp.spring.boot.starter.jwt.filter.token.JwtValidator;
+import com.hugoltsp.spring.boot.starter.jwt.filter.userdetails.UserDetails;
 import com.hugoltsp.spring.boot.starter.jwt.filter.userdetails.UserDetailsFactory;
 import io.github.hugoltsp.user.data.orm.UserToken;
 import io.github.hugoltsp.user.data.repository.UserRepository;
@@ -21,7 +22,7 @@ public class JwtSecurityConfig {
     }
 
     @Bean
-    public UserDetailsFactory userDetailsFactory(UserRepository repository) {
+    public UserDetailsFactory<UserDetails> userDetailsFactory(UserRepository repository) {
         return claims -> repository.findById(Long.valueOf(claims.getSubject())).map(AuthenticatedUserDetails::create);
     }
 
