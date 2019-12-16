@@ -39,8 +39,7 @@ public class UserLogIn {
         user.setLastLogin(LocalDateTime.now());
 
         userTokenService.invalidateTokens(user);
-        var token = userTokenService.createToken(user);
-        authenticationService.authenticate(token);
+        authenticationService.authenticate( userTokenService.createToken(user));
         return user;
     }
 

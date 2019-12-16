@@ -39,9 +39,7 @@ public class CreateUser {
                 });
 
         var user = userRepository.save(userCreationPort.asEntity());
-        var token = userTokenService.createToken(user);
-        user.addToken(token);
-        authenticationService.authenticate(token);
+        authenticationService.authenticate(userTokenService.createToken(user));
         return user;
     }
 
