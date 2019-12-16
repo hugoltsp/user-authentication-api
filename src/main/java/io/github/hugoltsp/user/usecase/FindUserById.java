@@ -2,7 +2,6 @@ package io.github.hugoltsp.user.usecase;
 
 import io.github.hugoltsp.user.data.orm.User;
 import io.github.hugoltsp.user.data.repository.UserRepository;
-import io.github.hugoltsp.user.infra.security.domain.AuthenticatedUserDetails;
 import io.github.hugoltsp.user.usecase.domain.UserApiAuthenticationException;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
@@ -17,17 +16,18 @@ public class FindUserById {
 
     private final Logger logger;
     private final UserRepository userRepository;
+    private final AuthenticationService authenticationService;
 
-    public FindUserById(Logger logger, UserRepository userRepository) {
+    public FindUserById(Logger logger, UserRepository userRepository, AuthenticationService authenticationService) {
         this.logger = logger;
         this.userRepository = userRepository;
+        this.authenticationService = authenticationService;
     }
 
     public Optional<User> find(Long id) {
         logger.info("fetching user by id [{}]", id);
 
-        if (AuthenticatedUserDetails.current()
-                .map(AuthenticatedUserDetails::getId)
+        if (authenticationService.getCurrentAuthenticatedUserId()
                 .filter(currentId -> !currentId.equals(id))
                 .isPresent()) {
             throw new UserApiAuthenticationException("The given id doesn't match the current authenticated user");

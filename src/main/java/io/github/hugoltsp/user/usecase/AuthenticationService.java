@@ -24,4 +24,9 @@ class AuthenticationService {
         );
     }
 
+    Optional<Long> getCurrentAuthenticatedUserId() {
+        return AuthenticatedUserDetails.current()
+                .map(AuthenticatedUserDetails::getId);
+    }
+
 }
